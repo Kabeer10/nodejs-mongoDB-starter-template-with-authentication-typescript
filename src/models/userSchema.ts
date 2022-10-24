@@ -14,7 +14,7 @@ const { Schema, model } = mongoose;
 export interface IUser extends PassportLocalDocument {
   email: string;
   username: string;
-  authProviders: ("GOOGLE" | "LOCAL")[];
+  authProviders: Array<"GOOGLE" | "LOCAL">;
   fullName?: string;
   gender?: Gender;
   country?: string;
@@ -31,8 +31,8 @@ export interface IUser extends PassportLocalDocument {
 }
 // extent the mongoose schema with passport-local-mongoose
 interface IUserModel extends PassportLocalModel<IUser> {
-  isUsernameExists(username: string): Promise<boolean>;
-  isEmailExists(email: string): Promise<boolean>;
+  isUsernameExists: (username: string) => Promise<boolean>;
+  isEmailExists: (email: string) => Promise<boolean>;
 }
 
 const userSchema = new Schema(
@@ -135,7 +135,7 @@ userSchema.static(
   }
 );
 
-//TODO: check if email is modified or not
+// TODO: check if email is modified or not
 
 userSchema.plugin(passportLocalMongoose, {
   usernameQueryFields: ["email", "phoneNumber"],

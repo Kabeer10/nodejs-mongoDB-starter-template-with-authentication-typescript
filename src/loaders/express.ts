@@ -18,23 +18,23 @@ import { ErrorCodes, ErrorLevel } from "../../@types/logs";
 
 const whitelistedDomains = ["http://localhost:3000"];
 
-export default (app: Application) => {
+export default async (app: Application) => {
   process.on("uncaughtException", async (error) => {
-    logger("00001", "", error.message, "Uncaught Exception");
+    await logger("00001", "", error.message, "Uncaught Exception");
   });
 
   process.on("unhandledRejection", async (ex: any) => {
-    logger("00002", "", ex.message, "Unhandled Rejection");
+    await logger("00002", "", ex.message, "Unhandled Rejection");
   });
 
   if (!Env.JWT_SECRET_KEY) {
-    logger("00003", "", "Jwtprivatekey is not defined", "Process-Env");
+    await logger("00003", "", "Jwtprivatekey is not defined", "Process-Env");
     process.exit(1);
   }
 
   const corsOptions: CorsOptions = {
     origin(origin, callback) {
-      if (!origin || whitelistedDomains.indexOf(origin) !== -1) {
+      if (!origin || whitelistedDomains.includes(origin)) {
         callback(null, true);
       } else {
         callback(new Error("Not allowed by CORS"));
@@ -88,7 +88,7 @@ export default (app: Application) => {
     next(error);
   });
 
-  app.use((error: any, req: Request, res: Response) => {
+  app.use(async (error: any, req: Request, res: Response) => {
     res.status(error.status || 500);
     let resultCode: ErrorCodes = "00015";
     let level: ErrorLevel = "External Error";
@@ -99,8 +99,8 @@ export default (app: Application) => {
       resultCode = "00014";
       level = "Client Error";
     }
-    // @ts-ignore
-    logger(resultCode, req?.user?._id ?? "", error.message, level, req);
+
+    await logger(resultCode, req?.user?._id ?? "", error.message, level, req);
     return res.json({
       resultMessage: error.message,
       resultCode,

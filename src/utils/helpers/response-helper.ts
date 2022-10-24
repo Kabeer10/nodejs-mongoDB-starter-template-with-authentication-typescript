@@ -15,16 +15,22 @@ export default (
     let key = code;
     if (!en[code]) key = "00008";
     let userId = "";
-    // @ts-ignore
-    if (req && req.user && req.user._id) userId = req.user._id;
+
+    if (req?.user?._id) userId = req.user._id;
 
     const enMessage = en[key];
     if (enMessage.includes("server error")) {
-      logger(code, userId, message, "Server Error", req);
+      logger(code, userId, message, "Server Error", req).catch((err) => {
+        console.log(err);
+      });
     } else {
-      logger(code, userId, message ?? enMessage, "Client Error", req);
+      logger(code, userId, message ?? enMessage, "Client Error", req).catch(
+        (err) => {
+          console.log(err);
+        }
+      );
     }
-    resMessage = code === "00008" ? message || enMessage : enMessage;
+    resMessage = code === "00008" ? message ?? enMessage : enMessage;
   }
 
   return {

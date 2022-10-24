@@ -3,7 +3,7 @@ import { config } from "dotenv";
 config();
 export default {
   DB_URI: process.env.DB_URI as string,
-  PORT: Number(process.env.PORT) as number,
+  PORT: Number(process.env.PORT),
   JWT_SECRET_KEY: process.env.JWT_SECRET_KEY as string,
   REFRESH_TOKEN_SECRET_KEY: process.env.REFRESH_TOKEN_SECRET_KEY as string,
   COOKIE_SECRET: process.env.COOKIE_SECRET as string,

@@ -1,9 +1,8 @@
 /* eslint-disable no-eval */
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response, CookieOptions } from "express";
 import jwt from "jsonwebtoken";
 import passport from "passport";
 
-import { CookieOptions } from "express";
 import { Env } from "../../config";
 import { resHandler } from "../../utils";
 
@@ -63,7 +62,7 @@ function verifyJWT(req: Request, res: Response, next: NextFunction) {
           .status(500)
           .json(resHandler(req, null, err.message, "00008"));
       }
-      if (!user) {
+      if (user === null) {
         return res
           .status(403)
           .json(resHandler(req, user, "Invalid Credentials", "00012"));

@@ -38,7 +38,7 @@
     "passport-local-mongoose": "^7.1.2",
     "randomstring": "^1.2.3",
     "rate-limiter-flexible": "^2.4.0",
-    "typescript": "^4.8.4"
+    "typescript": "*"
   },
   "devDependencies": {
     "@types/body-parser": "^1.19.2",
@@ -52,11 +52,15 @@
     "@types/passport-jwt": "^3.0.7",
     "@types/passport-local": "^1.0.34",
     "@types/randomstring": "^1.1.8",
-    "@typescript-eslint/eslint-plugin": "^5.40.1",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.40.1",
-    "eslint": "^8.26.0",
+    "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard-with-typescript": "^23.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "^6.0.0",
     "husky": "^8.0.0",
     "nodemon": "^2.0.20",
     "prettier": "^2.7.1",

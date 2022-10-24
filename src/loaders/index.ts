@@ -4,5 +4,5 @@ import { Application } from "express";
 
 export default async (app: Application) => {
   await dbConnect();
-  expressLoader(app);
+  await expressLoader(app);
 };

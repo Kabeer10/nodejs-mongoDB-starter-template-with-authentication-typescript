@@ -19,4 +19,7 @@ async function initialize() {
   });
 }
 
-initialize();
+initialize().catch((err) => {
+  console.log("\x1b[31m%s\x1b[0m", "❌------ Server Failed to Start ------❌");
+  console.log(err);
+});
