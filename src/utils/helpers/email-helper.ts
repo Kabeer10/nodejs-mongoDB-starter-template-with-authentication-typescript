@@ -3,16 +3,6 @@ import { Env } from "../../config";
 import { User } from "../../models";
 import generateRandomCode from "./generate-random-code";
 
-const transporter = nodeMailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: true,
-  auth: {
-    user: Env.GMAIL_EMAIL,
-    pass: Env.GMAIL_PASS,
-  },
-});
-
 function generateEmail(email: string, subject: string, template: string) {
   return {
     from: `"no-reply" <${Env.GMAIL_EMAIL}>`, // sender address
@@ -24,6 +14,15 @@ function generateEmail(email: string, subject: string, template: string) {
 
 async function sendEmail(email: string, subject: string, template: string) {
   try {
+    const transporter = nodeMailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
+      auth: {
+        user: Env.GMAIL_EMAIL,
+        pass: Env.GMAIL_PASS,
+      },
+    });
     const msg = generateEmail(email, subject, template);
     await transporter.sendMail(msg);
   } catch (err: any) {

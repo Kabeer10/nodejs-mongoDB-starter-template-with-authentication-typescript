@@ -1,6 +1,9 @@
 import { config } from "dotenv";
 
 config();
+
+console.log(`\u001b[35m\u{1F4E6} \u001b[0m\u001b[1mEnv loaded\u001b[0m`);
+
 export default {
   DB_URI: process.env.DB_URI as string,
   PORT: Number(process.env.PORT),
