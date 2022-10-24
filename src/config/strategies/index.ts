@@ -1,0 +1,2 @@
+import "./JwtStrategy";
+import "./localStrategy";
