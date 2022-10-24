@@ -16,4 +16,7 @@ export default {
   GMAIL_EMAIL: process.env.GMAIL_EMAIL as string,
   GMAIL_PASS: process.env.GMAIL_PASS as string,
   PREFIX: "/api",
+  GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID as string,
+  GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET as string,
+  PUBLIC_URL: process.env.PUBLIC_URL as string,
 };

@@ -84,6 +84,11 @@ export async function login(req: Request, res: Response) {
     });
     await user.save();
     res.cookie("refreshToken", refreshToken, COOKIE_OPTIONS);
+
+    if (req.body.type === "GOOGLE") {
+      return res.redirect(Env.PUBLIC_URL);
+    }
+
     return res
       .status(200)
       .json(resHandler(req, { token, user }, "User logged in successfully"));

@@ -31,6 +31,25 @@ router.post(
 );
 router.get("/logout", logout);
 
+// GOOGLE login
+router.get(
+  "/google",
+  passport.authenticate("google", {
+    scope: ["email", "profile"],
+    session: false,
+  })
+);
+
+router.get(
+  "/google/callback",
+  passport.authenticate("google", { session: false }),
+  (req, _, next) => {
+    req.body.type = "GOOGLE";
+    next();
+  },
+  login
+);
+
 // email verification, password reset, routes
 router.post("/forgot-password", validateForgetPassword, forgetPassword);
 router.post("/reset-password", validateResetPassword, resetPassword);
