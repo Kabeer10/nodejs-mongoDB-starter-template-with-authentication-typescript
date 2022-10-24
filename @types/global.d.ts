@@ -1,4 +1,4 @@
-type OtpPurpose = "PHONE_VERIFICATION" | "LOGIN" | "RESET_PASSWORD";
+type OtpPurpose = "EMAIL_VERIFICATION" | "LOGIN" | "RESET_PASSWORD";
 
 type TokenPayload = {
   _id: string;
@@ -6,6 +6,7 @@ type TokenPayload = {
   emailVerified: boolean;
   purpose?: string;
   isDeleted: boolean;
+  createdAt: Date;
 };
 
 type Gender = "Male" | "Female" | "Other";

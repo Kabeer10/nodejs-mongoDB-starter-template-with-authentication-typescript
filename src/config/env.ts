@@ -10,5 +10,7 @@ export default {
   NODE_ENV: process.env.NODE_ENV as string,
   REFRESH_TOKEN_EXPIRY: process.env.REFRESH_TOKEN_EXPIRY as string,
   SESSION_EXPIRY: process.env.SESSION_EXPIRY as string,
+  GMAIL_EMAIL: process.env.GMAIL_EMAIL as string,
+  GMAIL_PASS: process.env.GMAIL_PASS as string,
   PREFIX: "/api",
 };
