@@ -101,7 +101,11 @@ export async function logout(req: Request, res: Response) {
   try {
     const { signedCookies = {} } = req;
     const { refreshToken } = signedCookies;
-    const user = await User.findOne({ _id: req.user._id, isDeleted: false });
+    const decoded = jwt.verify(
+      refreshToken,
+      Env.REFRESH_TOKEN_SECRET_KEY
+    ) as TokenPayload;
+    const user = await User.findOne({ _id: decoded._id, isDeleted: false });
     if (!user) {
       return res
         .status(400)
